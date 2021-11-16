@@ -1,3 +1,5 @@
+package apiWithHttp4s
+
 import cats.effect.{IOApp, IO, ExitCode}
 import org.http4s.HttpRoutes
 import org.http4s.dsl.io._
@@ -30,7 +32,7 @@ object Main
 
   def run(args: List[String]): IO[ExitCode] =
     BlazeServerBuilder[IO]
-      .bindHttp(8080, "localhost")
+      .bindHttp(8080, "0.0.0.0")
       .withHttpApp(httpApp)
       .serve
       .compile

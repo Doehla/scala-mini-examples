@@ -12,6 +12,9 @@ val scalaLogVersion = "3.9.4"
  */
 lazy val apiWithHttp4s = project
   .in(file("examples/apiWithHttp4s"))
+  .enablePlugins(JavaAppPackaging)
+  .enablePlugins(DockerPlugin)
+  .enablePlugins(AshScriptPlugin)
   .settings(
     name := "apiWithHttp4s",
     version := "0.0.1",
@@ -30,5 +33,7 @@ lazy val apiWithHttp4s = project
       ),
     testOptions ++= Seq(
       Tests.Argument(TestFrameworks.ScalaTest, "-oS")
-      )
+      ),
+    Compile / mainClass := Some("apiWithHttp4s.Main"),
+    dockerBaseImage := "openjdk:jre-alpine"
     )
