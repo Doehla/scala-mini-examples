@@ -71,7 +71,7 @@ object HelloAPI
       }
     }.handleErrorWith {
       case InvalidMessageBodyFailure(_, Some(y)) => {
-        sys.env.getOrElse("composeErrorMessage", false).asInstanceOf[Boolean] match {
+        sys.env.getOrElse("composeErrorMessage", "false").toBoolean match {
           case true => UnprocessableEntity(formatJsonParseError(y))
           case false => UnprocessableEntity()
         }
