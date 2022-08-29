@@ -1,2 +1,9 @@
 *.class
 *.log
+*.class
+*.log
+*.jar
+
+.bsp/**
+.idea/**
+**/target/**
