@@ -21,16 +21,6 @@ sealed trait s3Object {
       .mkString(".")
   }
 
-  /** define map()
-   *
-   * This is essential for allowing this to work in the for statements.
-   *
-   * @param f function for mapping
-   * @param value the value of the item for use
-   * @tparam A type for return result
-   * @return f applied on the value
-   */
-  def map[A](f: s3Object => A, value: s3Object): A = f(value)
 }
 
 
