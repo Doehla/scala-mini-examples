@@ -31,15 +31,36 @@ object s3Action {
   def downloadFile(
     obj: s3Object,
     destination: File,
-    overwrite: Boolean = true
+    overwrite: Boolean
   ): IO[Unit] =
-    downloadFile(obj.bucket, obj.key, destination, overwrite)
+    actuallyDownloadFile(obj.bucket, obj.key, destination, overwrite)
+
+  def downloadFile(
+    obj: s3Object,
+    destination: File
+  ): IO[Unit] =
+    actuallyDownloadFile(obj.bucket, obj.key, destination, overwrite = true)
 
   def downloadFile(
     bucket: String,
     key: String,
     destination: File,
-    overwrite: Boolean = true
+    overwrite: Boolean
+  ): IO[Unit] =
+    actuallyDownloadFile(bucket, key, destination, overwrite)
+
+  def downloadFile(
+    bucket: String,
+    key: String,
+    destination: File
+  ): IO[Unit] =
+    actuallyDownloadFile(bucket, key, destination, overwrite = true)
+
+  private def actuallyDownloadFile(
+    bucket: String,
+    key: String,
+    destination: File,
+    overwrite: Boolean
   ): IO[Unit] = {
     for {
       _ <- IO.blocking(Files.createDirectories(destination.toPath.toAbsolutePath.getParent))
