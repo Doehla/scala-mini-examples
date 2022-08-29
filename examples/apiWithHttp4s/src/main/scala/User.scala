@@ -16,6 +16,7 @@ object User {
   }
 
   implicit val encoder: Encoder[User] = (a: User) => Json.obj(
-    ("name", a.name.asJson)
+    ("name", a.name.asJson),
+    ("other", s"hello there, ${a.name}!".asJson)
     )
 }

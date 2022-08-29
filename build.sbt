@@ -27,6 +27,10 @@ lazy val apiWithHttp4s = project
       "io.circe" %% "circe-generic-extras" % circeVersion,
       "io.circe" %% "circe-parser" % circeVersion,
       "io.circe" %% "circe-literal" % circeVersion,
+      /* TODO: The logging system here has a successor through apache.
+       *    found here: https://logging.apache.org/log4j/scala/index.html
+       *    Rather than using logback, replace this with log4j2
+       */
       "ch.qos.logback" % "logback-classic" % logbackVersion,
       "com.typesafe.scala-logging" %% "scala-logging" % scalaLogVersion,
       "org.scalatest" %% "scalatest" % scalatestVersion % "test"
@@ -37,3 +41,6 @@ lazy val apiWithHttp4s = project
     Compile / mainClass := Some("apiWithHttp4s.Main"),
     dockerBaseImage := "openjdk:jre-alpine"
     )
+
+
+//  "com.amazon.redshift" % "jdbc42" % "2.1.0.1" from "https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.1.0.1/redshift-jdbc42-2.1.0.1.jar",
