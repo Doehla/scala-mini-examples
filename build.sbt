@@ -28,6 +28,7 @@ lazy val dataEngTools = project
       /** Packages to check out:
        * --- https://fs2.io/#/
        * --- https://monix.io/
+       * --- "org.typelevel" %% "log4cats-slf4j" % "2.4.0",
        *
        */
 
