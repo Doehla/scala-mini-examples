@@ -1,4 +1,5 @@
 import cats.effect._
+import com.styleseat.dataEngTools.FileHelper
 import com.styleseat.dataEngTools.s3.s3Action
 import com.styleseat.dataEngTools.s3.s3Uri
 
@@ -35,17 +36,12 @@ import java.io.File
  */
 object Main extends IOApp {
   override def run(args: List[String]): IO[ExitCode] = {
-
-//    val x = s3Uri("s3://styleseat-logs/events/production/dt=2022-08-25-15/202208251540_f62c_0.gz")
-//    val target = new File(s"temp.${x.fileExtension}")
-
     for {
       _ <-  if(args.length > 1) IO.raiseError(new IllegalArgumentException("Need destination file"))
             else IO.unit
       sourceFileName = s3Uri("s3://styleseat-logs/events/production/dt=2022-08-25-15/202208251540_f62c_0.gz")
       targetFileName = new File(s"${args.headOption.getOrElse("temp")}.${sourceFileName.fileExtension}")
       _ <- s3Action.downloadFile(sourceFileName, targetFileName)
-      _ <- IO.println("Done")
     } yield ExitCode.Success
   }
 
