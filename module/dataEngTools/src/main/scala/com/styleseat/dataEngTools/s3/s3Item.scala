@@ -1,5 +1,7 @@
 package com.styleseat.dataEngTools.s3
 
+import com.styleseat.dataEngTools.FileHelper
+
 import java.nio.file.Paths
 import scala.util.matching.Regex
 
@@ -11,15 +13,8 @@ sealed trait s3Object {
   /** Provide a helpful utility for getting
    * the file extension for the s3Action item.
    */
-  final lazy val fileExtension: String = {
-    Paths
-      .get(key)
-      .getFileName
-      .toString
-      .split("\\.")
-      .drop(1)
-      .mkString(".")
-  }
+  final lazy val fileExtension: String =
+    FileHelper.getExtension(Paths.get(key).getFileName.toFile)
 
 }
 
